@@ -92,7 +92,8 @@
 		}
 	</style>
 	<link rel="stylesheet" id="rigardi_google_fonts-css" href="./InCam_files/css" type="text/css" media="all">
-	<script type="text/javascript" src="./InCam_files/jquery.js"></script>
+	<!-- <script type="text/javascript" src="./InCam_files/jquery.js"></script> -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 	<script id="st_insights_js" type="text/javascript" src="./InCam_files/st_insights.js"></script>
 	<script
 		type="text/javascript">var wc_add_to_cart_params = { "ajax_url": "\/wp-admin\/admin-ajax.php", "wc_ajax_url": "\/?wc-ajax=%%endpoint%%", "i18n_view_cart": "View cart", "cart_url": "http:\/\/rigardi.like-themes.com\/cart\/", "is_cart": "", "cart_redirect_after_add": "no" };</script>
@@ -877,9 +878,11 @@
 										href="#sub"><span>Subscribe</span></a></li>
 								<li id="menu-item-63" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-46"><a
 										href="#"><span>
-											<div class="g-signin2" data-onsuccess="onSignIn" data-redirecturi="https://www.facebook.com/">
-												<!-- <div class="g-signin2" data-onsuccess="onSignIn"> -->
+											<!-- <div class="g-signin2" data-onsuccess="onSignIn" data-redirecturi="https://www.facebook.com/"> -->
+											<div class="g-signin2" data-onsuccess="onSignIn">
 											</div>
+											<button class="btn btn-danger p-signout" onclick="signOut()"
+												style="display: none;">SignOut</button>
 										</span></a></li>
 
 							</ul>
@@ -2443,6 +2446,7 @@
 	<!-- super cache -->
 	<script type="text/javascript">
 		function onSignIn(googleUser) {
+
 			// Useful data for your client-side scripts:
 			var profile = googleUser.getBasicProfile();
 			console.log("ID: " + profile.getId()); // Don't send this directly to your server!
@@ -2457,6 +2461,18 @@
 			console.log("ID Token: " + id_token);
 
 			// window.location = 'www.facebook.com'
+			$(".g-signin2").css("display", "none");
+			$(".p-signout").css("display", "block");
+
+		}
+
+		function signOut() {
+			let auth2 = gapi.auth2.getAuthInstance();
+			auth2.signOut().then(function () {
+				alert("you have been successfully signed out");
+				$(".g-signin2").css("display", "block");
+				$(".p-signout").css("display", "none");
+			})
 		}
 	</script>
 </body>
